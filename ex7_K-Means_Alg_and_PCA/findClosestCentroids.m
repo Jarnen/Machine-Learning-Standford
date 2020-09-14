@@ -20,12 +20,15 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+distance = zeros(size(X,1), K);
 
+for k=1:K
+  diff_vector = bsxfun(@minus, X, centroids(k,:));
+  sumsq = sum(diff_vector.^2,2);
+  distance(:,k) = sumsq;
+endfor
 
-
-
-
-
+[minval, idx] = min(distance, [], 2);
 
 % =============================================================
 
