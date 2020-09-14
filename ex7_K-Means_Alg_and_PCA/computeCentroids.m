@@ -26,15 +26,12 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+for k=1:K
+  sel_idx = find(idx == k) 
+  centroids(k,:) = mean(X(sel_idx,:),1);
+endfor
 
 % =============================================================
-
 
 end
 
