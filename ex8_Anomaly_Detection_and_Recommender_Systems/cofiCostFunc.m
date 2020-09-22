@@ -39,21 +39,22 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the 
 %                     partial derivatives w.r.t. to each element of Theta
 %
+% Calculate the cost:
+pred_ratings = X * Theta';
+rating_err = pred_ratings - Y;
+error_factor = rating_err .* R;
+J = 0.5 * sumsq(error_factor(:));
 
+% Calculate the gradients
+X_grad = error_factor * Theta;
+Theta_grad = error_factor' * X;
 
+% Calculate the regularized cost
+J = J + (lambda / 2) * (sumsq(Theta(:)) + sumsq(X(:)));
 
-
-
-
-
-
-
-
-
-
-
-
-
+% Calculate the gradient regularization terms
+X_grad = X_grad + lambda * X;
+Theta_grad = Theta_grad + lambda * Theta;
 
 % =============================================================
 
